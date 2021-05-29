@@ -49,7 +49,7 @@ addi	$sp, $sp, 16
 jr	$ra
 yes:
 
-addi	$a0, $a0, -48	# (int) token
+#addi	$a0, $a0, -48	# (int) token
 
 addi	$a1, $zero, 1	# yes 
 lw	$t0, 0($sp)
@@ -212,13 +212,10 @@ add	$a0, $a1, $zero
 syscall
 jr	$k0
 ifCal1:
-bgt	$a0, 10, continues
-addi	$a0, $a0, 48
-j	ifCal1
-continues:
 jal	IsDigit
 nop
 beqz	$a1, elseCal1
+addi	$a0, $a0, -48 
 jal	Push		#if digit -> push
 nop
 addi	$t0, $t0, 1
@@ -269,6 +266,3 @@ add 	$a0, $t3, $zero
 jal	Push
 add	$t0, $t0, 1
 j	calWhile
-
-
-
